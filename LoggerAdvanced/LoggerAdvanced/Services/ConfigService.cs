@@ -15,16 +15,26 @@ namespace LoggerAdvanced
     {
         public IConfig Config { get; set; }
 
-        public void SerializeConfig()
+        private void SerializeConfig(IConfig config)
         {
-            var json = JsonConvert.SerializeObject(Config);
+            var json = JsonConvert.SerializeObject(config);
             File.WriteAllText("config.json", json);
         }
 
-        public void DeserialiseConfig()
+        private IConfig DeserialiseConfig()
         {
             var configFile = File.ReadAllText("config.json");
-            var config = JsonConvert.DeserializeObject<Config>(configFile);
+            return JsonConvert.DeserializeObject<Config>(configFile);
+        }
+
+        public string PathFromConfigCreating()
+        {
+            DateService dateService = new DateService();
+            ConfigService configService = new ConfigService();
+            IConfig config = configService.DeserialiseConfig();
+            //string filePath = "D:\\Учеба\\A-LEVEL\\.NET C#\\FilesForM2L3HW" + $"\\log{dateService.GetTimeToString()}.txt";
+
+            return config.DirPath + $"\\log{dateService.GetTimeToString()}.txt";
         }
     }
 }

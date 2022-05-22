@@ -1,4 +1,5 @@
 ﻿using LoggerAdvanced.Interfaces;
+using LoggerAdvanced.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,9 +18,13 @@ namespace LoggerAdvanced.Services
         {
             string res = LoggerService.LogsToString(Logs);
 
-            DateService dateService = new DateService();
+            //DateService dateService = new DateService();
+            //ConfigService configService = new ConfigService();
+            //string filePath1 = "D:\\Учеба\\A-LEVEL\\.NET C#\\FilesForM2L3HW" + $"\\log{dateService.GetTimeToString()}.txt";
 
-            string filePath = $"D:\\Учеба\\A-LEVEL\\.NET C#\\FilesForM2L3HW\\log{dateService.GetTimeToString()}.txt";
+            ConfigService configService = new ConfigService();
+            string filePath = configService.PathFromConfigCreating();
+
             using (TextWriter writer = new StreamWriter(filePath, false))
             {
                 FileInfo fileInfo = new FileInfo(filePath);
