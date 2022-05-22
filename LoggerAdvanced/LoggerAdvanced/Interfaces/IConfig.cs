@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace LoggerAdvanced.Interfaces
 {
-    public interface IResult
+    internal interface IConfig
     {
-        public bool Status { get; set; }
-        public string ErrorMessage { get; set; }
+        public string DirPath { get; set; }
     }
 }

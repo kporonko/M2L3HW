@@ -9,17 +9,21 @@ namespace LoggerAdvanced.Services
 {
     internal class LoggerService
     {
-        public static IResult CreatingObjects(string type, string name)
+        public static void CreateLog(string type, string name)
         {
             DateTime dateTime = DateTime.Now;
             var logger = Logger.Instance;
-            logger.Logs[Starter.CurrIndex] = $"{{{dateTime}}}: {{{type}}}: {{Start Method: {name}}}";
-            if (type == "Error")
+            logger.Logs[Logger.CurrLogIndex] = $"{{{dateTime}}}: {{{type}}}: {{Start Method: {name}}}";
+        }
+        public static string LogsToString(string[] Logs)
+        {
+            string res = string.Empty;
+            for (int i = 0; i < Logs.Length; i++)
             {
-                return new Result { Status = false };
+                res += Logs[i] + "\n";
             }
 
-            return new Result { Status = true };
+            return res;
         }
     }
 }

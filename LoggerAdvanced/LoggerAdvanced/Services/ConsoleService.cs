@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace LoggerAdvanced.Services
 {
-    internal class ConsoleWriter : ILogWriter
+    public class ConsoleService : ILogWriter
     {
+        /// <summary>
+        /// Method that writes all the logs to console.
+        /// </summary>
         public void Write(string[] Logs)
         {
-            string res = string.Empty;
-            for (int i = 0; i < Logs.Length; i++)
-            {
-                res += Logs[i] + "\n";
-            }
+            string res = LoggerService.LogsToString(Logs);
 
             Console.WriteLine(res);
         }

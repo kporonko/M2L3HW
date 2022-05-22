@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LoggerAdvanced
+namespace LoggerAdvanced.Models
 {
-    public class Result : IResult
+    internal class Config : IConfig
     {
-        public bool Status { get; set; }
-        public string ErrorMessage { get; set; }
+        public string DirPath { get; set; }
     }
 }

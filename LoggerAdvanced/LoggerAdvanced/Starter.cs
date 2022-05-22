@@ -10,8 +10,6 @@ namespace LoggerAdvanced
 {
     internal class Starter
     {
-        public static int CurrIndex { get; set; } = 0;
-
         /// <summary>
         /// Method that runs a program by creating a logger instance and generates logs randomly by calling a random method.
         /// </summary>
@@ -21,34 +19,37 @@ namespace LoggerAdvanced
             var logger = Logger.Instance;
             for (int i = 0; i < 100; i++)
             {
-                IResult res = new Result();
+                bool res = false;
                 Random random = new Random();
                 int method = random.Next(0, 3);
-                CurrIndex = i;
-                switch (method)
+                Logger.CurrLogIndex = i;
+                try
                 {
-                    case 0:
-                        res = actions.FirstMethod();
-                        break;
-                    case 1:
-                        res = actions.SecondMethod();
-                        break;
-                    case 2:
-                        res = actions.ThirdMethod();
-                        break;
+                    switch (method)
+                    {
+                        case 0:
+                            res = actions.FirstMethod();
+                            break;
+                        case 1:
+                            res = actions.SecondMethod();
+                            break;
+                        case 2:
+                            res = actions.ThirdMethod();
+                            break;
+                    }
                 }
-
-                if (!res.Status)
+                catch (BusinessException ex)
                 {
-                    string msg = $"Action failed by a reason: {res.ErrorMessage}";
-                    LoggerService.CreatingObjects("Error", msg);
+                    LoggerService.CreateLog("Warning", $"Action got this custom Exception: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    LoggerService.CreateLog("Error", $"Action got this custom Exception: {ex}");
                 }
             }
 
-            FileWriter fileWriter = new FileWriter();
-            ConsoleWriter consoleWriter = new ConsoleWriter();
-            fileWriter.Write(logger.Logs);
-            consoleWriter.Write(logger.Logs);
+            Logger.FileWriter.Write(logger.Logs);
+            Logger.ConsoleWriter.Write(logger.Logs);
         }
     }
 }

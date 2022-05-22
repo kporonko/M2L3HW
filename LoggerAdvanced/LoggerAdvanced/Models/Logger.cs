@@ -1,4 +1,5 @@
 ﻿using LoggerAdvanced.Interfaces;
+using LoggerAdvanced.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,6 +33,9 @@ namespace LoggerAdvanced
             }
         }
 
+        public static FileService FileWriter { get; set; } = new FileService();
+        public static ConsoleService ConsoleWriter { get; set; } = new ConsoleService();
         public string[] Logs { get; set; } = new string[100];
+        public static int CurrLogIndex { get; set; } = 0;
     }
 }

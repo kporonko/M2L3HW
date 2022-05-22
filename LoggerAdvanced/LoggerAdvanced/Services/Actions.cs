@@ -11,19 +11,21 @@ namespace LoggerAdvanced
 {
     internal class Actions
     {
-        public IResult FirstMethod()
+        public bool FirstMethod()
         {
-            return LoggerService.CreatingObjects("Info", $"{MethodBase.GetCurrentMethod().Name}");
+            LoggerService.CreateLog("Info", $"{MethodBase.GetCurrentMethod().Name}");
+            return true;
         }
 
-        public IResult SecondMethod()
+        public bool SecondMethod()
         {
-            return LoggerService.CreatingObjects("Warning", $"{MethodBase.GetCurrentMethod().Name}");
+            throw new BusinessException();
         }
 
-        public IResult ThirdMethod()
+        public bool ThirdMethod()
         {
-            return new Result { Status = false, ErrorMessage = "I broke a logic" };
+
+            throw new Exception("I broke a logic");
         }
     }
 }
