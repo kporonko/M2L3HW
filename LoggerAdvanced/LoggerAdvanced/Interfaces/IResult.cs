@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LoggerAdvanced
+namespace LoggerAdvanced.Interfaces
 {
-    public class Result
+    public interface IResult
     {
         public bool Status { get; set; }
         public string ErrorMessage { get; set; }

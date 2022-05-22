@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LoggerAdvanced.Interfaces;
+using LoggerAdvanced.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +21,7 @@ namespace LoggerAdvanced
             var logger = Logger.Instance;
             for (int i = 0; i < 100; i++)
             {
-                Result res = new Result();
+                IResult res = new Result();
                 Random random = new Random();
                 int method = random.Next(0, 3);
                 CurrIndex = i;
@@ -39,11 +41,14 @@ namespace LoggerAdvanced
                 if (!res.Status)
                 {
                     string msg = $"Action failed by a reason: {res.ErrorMessage}";
-                    Logger.CreatingObjects("Error", msg);
+                    LoggerService.CreatingObjects("Error", msg);
                 }
             }
 
-            logger.WriteInFile();
+            FileWriter fileWriter = new FileWriter();
+            ConsoleWriter consoleWriter = new ConsoleWriter();
+            fileWriter.Write(logger.Logs);
+            consoleWriter.Write(logger.Logs);
         }
     }
 }
