@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace LoggerAdvanced
 {
-    [Serializable]
     internal class ConfigService
     {
         public IConfig Config { get; set; }
@@ -18,12 +17,12 @@ namespace LoggerAdvanced
         private void SerializeConfig(IConfig config)
         {
             var json = JsonConvert.SerializeObject(config);
-            File.WriteAllText("config.json", json);
+            File.WriteAllText("D:\\Учеба\\A-LEVEL\\.NET C#\\M2L3HW\\LoggerAdvanced\\LoggerAdvanced\\config.json", json);
         }
 
         private IConfig DeserialiseConfig()
         {
-            var configFile = File.ReadAllText("config.json");
+            var configFile = File.ReadAllText("D:\\Учеба\\A-LEVEL\\.NET C#\\M2L3HW\\LoggerAdvanced\\LoggerAdvanced\\config.json");
             return JsonConvert.DeserializeObject<Config>(configFile);
         }
 
@@ -32,7 +31,6 @@ namespace LoggerAdvanced
             DateService dateService = new DateService();
             ConfigService configService = new ConfigService();
             IConfig config = configService.DeserialiseConfig();
-            //string filePath = "D:\\Учеба\\A-LEVEL\\.NET C#\\FilesForM2L3HW" + $"\\log{dateService.GetTimeToString()}.txt";
 
             return config.DirPath + $"\\log{dateService.GetTimeToString()}.txt";
         }

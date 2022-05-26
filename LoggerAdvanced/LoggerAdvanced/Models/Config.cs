@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace LoggerAdvanced.Models
 {
+    [Serializable]
     internal class Config : IConfig
     {
         public string DirPath { get; set; }

@@ -18,10 +18,6 @@ namespace LoggerAdvanced.Services
         {
             string res = LoggerService.LogsToString(Logs);
 
-            //DateService dateService = new DateService();
-            //ConfigService configService = new ConfigService();
-            //string filePath1 = "D:\\Учеба\\A-LEVEL\\.NET C#\\FilesForM2L3HW" + $"\\log{dateService.GetTimeToString()}.txt";
-
             ConfigService configService = new ConfigService();
             string filePath = configService.PathFromConfigCreating();
 
@@ -35,19 +31,13 @@ namespace LoggerAdvanced.Services
                 }
                 writer.Write(res);
             }
-            //File.WriteAllText("log.txt", res);
         }
         
         private bool IsThreeOrMoreFilesInDirectory(string path)
         {
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
             FileInfo[] fileInfos = directoryInfo.GetFiles();
-            if (fileInfos.Length >= 4)
-            {
-                return true;
-            }
-
-            return false;
+            return fileInfos.Length >= 4;  
         }
 
         private string FindTheOldestFileInDirectory(string path)
